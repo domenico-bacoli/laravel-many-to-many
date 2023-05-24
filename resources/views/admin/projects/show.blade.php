@@ -3,7 +3,6 @@
 @section('content')
     <div class="container d-flex justify-content-center mt-5">
         <div class="card-project text-center">
-          <div class="type">Tipo: {{$project->type?->name}}</div>
             <div class="thumb">
                 <img src="{{$project->thumb}}" alt="anteprima progetto">
             </div>
@@ -12,6 +11,15 @@
                 <div class="link">{{$project->link}}</div>
                 <div class="language">{{$project->Languages}}</div>
                 <p>{{$project->description}}</p>
+                <div class="type">Tipo: {{$project->type?->name}}</div>
+                <div class="d-flex">
+                  @foreach ($project->technologies as $technology)
+                  
+                    <span class="badge rounded-pill mx-1" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+                  @endforeach
+                </div>
+         
+               
                 <div class="button-edit">
                     <a href="{{route('admin.projects.edit', $project)}}" class="me-2"><button class="btn btn-primary">Modifica</button></a>
                         <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">

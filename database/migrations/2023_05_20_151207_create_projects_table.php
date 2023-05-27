@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
              $table->string('title', 200)->unique();
-             $table->text('thumb');
+             $table->string('thumb')->nullable();
              $table->string('link', 30);
              $table->text('description');
              //lo slug è il titolo reso leggibile come url, può essere utilizzato al posto dell'id

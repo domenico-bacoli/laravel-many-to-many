@@ -4,7 +4,7 @@
     
     <main class="home-container d-flex flex-column align-items-center py-5">
         <h1 class="mb-5">Inserisci un nuovo Progetto</h1>
-        <form class="w-50" action="{{ route('admin.projects.store') }}" method="POST">
+        <form class="w-50" action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title">Titolo</label>
@@ -17,8 +17,8 @@
                 @enderror
             </div>
             <div class="mb-3 ">
-                <label for="thumb">Url Anteprima</label>
-                <input class="form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb')}}">
+                <label for="thumb">Anteprima</label>
+                <input class="form-control @error('thumb') is-invalid @enderror" type="file" id="thumb" name="thumb">
                 @error('thumb')
                 <div class="invalid-feedback">
                     {{$message}}

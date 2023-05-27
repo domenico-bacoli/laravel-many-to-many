@@ -4,7 +4,7 @@
     
     <main class="home-container d-flex d-flex flex-column align-items-center py-5">
         <h1 class="mb-5">Modifica il Progetto</h1>
-        <form class="w-50" action="{{ route('admin.projects.update', $project) }}" method="POST">
+        <form class="w-50" action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -18,8 +18,8 @@
                 @enderror
             </div>
             <div class="mb-3 ">
-                <label for="thumb">Url Anteprima</label>
-                <input class="form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb') ?? $project->thumb}}">
+                <label for="thumb">Anteprima</label>
+                <input type="file" id="thumb" name="thumb" class="form-control @error('thumb') is-invalid @enderror">
                 @error('thumb')
                 <div class="invalid-feedback">
                     {{$message}}

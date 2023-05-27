@@ -8,6 +8,7 @@ use App\Models\Technology;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Str;
@@ -49,7 +50,12 @@ class ProjectController extends Controller
         $formData = $request->all();
 
         $newProject = new Project();
-        
+
+        if($request->hasFile('thumb')) {
+             $path = Storage::put('project_thumb', $request->thumb);
+             $formData['thumb'] = $path;
+        }
+
         $newProject->fill($formData);
 
         $newProject->slug = Str::slug($formData['title'], '-');
@@ -99,9 +105,18 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
-    {
-        $this->validation($request);
+    {   
         $formData = $request->all();
+        $this->validation($request);
+        
+        if($request->hasFile('thumb')) {
+            if($project->thumb) {
+                Storage::delete($project->thumb);
+            }
+
+            $path = Storage::put('project_thumb', $request->thumb);
+            $formData['thumb'] = $path;
+        }
 
         $project->slug = Str::slug($formData['title'], '-');
         $project->update($formData);
@@ -132,7 +147,7 @@ class ProjectController extends Controller
 
         $validator = Validator::make($formData, [
             'title' => 'required|max:200',
-            'thumb' => 'required|',
+            'thumb' => 'nullable|image|max:4096',
             'link' => 'required|max:30',
             'description' => 'required',
             'type_id' => 'nullable|exists:types,id',
@@ -140,7 +155,8 @@ class ProjectController extends Controller
         ], [
             'title.required' => 'inserisci un titolo',
             'title.max' => 'massimo 200 caratteri',
-            'thumb.required' => "inserisci una url per l'anteprima",
+            'thumb.max' => "La dimensione del file è troppo grande",
+            'thumb.image' => 'il file deve essere di tipo immagine',
             'description.required' => 'inserisci una descizione',
             'type_id.exists' => 'Il tipo deve essere presente',
         ])->validate();

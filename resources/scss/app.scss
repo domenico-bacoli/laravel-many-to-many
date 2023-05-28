@@ -3,9 +3,9 @@
 
 // Common
 button{
-    width: 140px;
-    text-align: center;
+    min-width: 130px;
 }
+
 
 .navbar-toggler{
     border: none;
@@ -18,14 +18,6 @@ button{
 // admin/projects/dashboard STYLE
 strong{
     color: rgb(234, 81, 81);
-}
-
-.add-button{
-
-    button{
-        width: 200px;
-        height: 50px;
-    }
 }
 
 // admin/projects/index STYLE
@@ -68,7 +60,19 @@ strong{
 }
 
 .card-container{
-    height: calc(100vh - 106px);
+    // height: calc(100vh - 136px);
     overflow: auto;
     padding: 40px 20px;
+}
+
+.navigation-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+main.container{
+    height: calc(100vh - 136px);
+    overflow: auto;
 }

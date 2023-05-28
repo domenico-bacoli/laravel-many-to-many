@@ -11,7 +11,7 @@
               <div class="link">{{$project->link}}</div>
               <div class="language">{{$project->Languages}}</div>
               <p>{{$project->description}}</p>
-              <div class="type">Tipo: {{$project->type?->name}}</div>
+              <div class="type">Tipo: {{$project->type->name ?? 'nessuna'}}</div>
               <div class="d-flex">
                 @foreach ($project->technologies as $technology)
                 

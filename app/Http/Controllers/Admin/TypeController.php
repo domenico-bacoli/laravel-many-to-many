@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.types.index');
+    {   
+        $types = Type::all();
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -46,8 +48,8 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Type $type)
-    {
-        //
+    {    
+        return view('admin.types.show', compact('type'));
     }
 
     /**

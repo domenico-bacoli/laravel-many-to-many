@@ -3,8 +3,9 @@
 @section('content')
 <div class="container py-3">
    
-    <h1>Tutti i post di categoria</h1>
-    {{-- {{dd($type->projects)}} --}}
+    
+    <h1>Tutti i progetti di categoria {{$type->name}}</h1>
+
 
     <h3>Progetti collegati</h3>
       <table class="table table-striped">
@@ -18,13 +19,14 @@
           @foreach ($type->projects as $project)
               <tr>
                 <td>{{$project->title}}</td>
-                
+
                 <td><a href="{{route('admin.projects.show', $project)}}">Mostra</a></td>
               </tr>
           @endforeach
         </tbody>
+        
       </table>
-    </div>
+</div>
 @endsection
     
     {{-- @if( count($type->project) > 0)

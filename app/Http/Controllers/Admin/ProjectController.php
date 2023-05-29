@@ -23,8 +23,8 @@ class ProjectController extends Controller
     public function index()
     {   
         $projects = Project::all();
-        
-        return view('admin.projects.index', compact('projects'));
+        $types = Type::all();
+        return view('admin.projects.index', compact('projects', 'types'));
     }
 
     /**
@@ -139,6 +139,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if($project->thumb) {
+            Storage::delete($project->thumb);
+        }
+        
         $project->delete();
         return redirect()->route('admin.projects.index');
     }

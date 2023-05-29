@@ -15,7 +15,6 @@
       </thead>
 
       <tbody>
-
         @foreach($types as $type)
         
           <tr>
@@ -24,7 +23,6 @@
             <td>{{count($type->projects)}}</td>
             <td><a href="{{route('admin.types.show', $type)}}"><i class="fa-solid fa-magnifying-glass text-secondary"></i></a></td>
           </tr>
-
         @endforeach
 
       </tbody>

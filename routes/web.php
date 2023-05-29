@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
 
-    Route::resource('types', TypeController::class)->parameters(['types' => 'types:slug']);
+    Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug']);
 });
 
 Route::resource('guest/projects', HomeController::class)->parameters(['projects' => 'project:slug']);
